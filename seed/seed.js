@@ -23,7 +23,7 @@ const seedDB = async () => {
 	// generate users
 	const users = []
 	
-	for (let i = 0; i < 5; i++) {
+	for (let i = 0; i < 10; i++) {
 		const firstName = faker.person.firstName()
 		const lastName = faker.person.lastName()
 		const user = await User.create({
