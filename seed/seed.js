@@ -48,14 +48,14 @@ const seedDB = async () => {
 	console.log(user)
 	
 	// generate posts and comments
-	for (let i = 0; i < 5; i++) {
+	for (let i = 0; i < 10; i++) {
 		const post = await Post.create({
 			title: faker.book.title(),
 			author: users[Math.floor(Math.random() * users.length)],
 			text: faker.lorem.paragraphs(),
 		})
 	
-		for (let i = 0; i < 3; i++) {
+		for (let i = 0; i < 5; i++) {
 			await Comment.create({
 				postId: post.id,
 				author: users[Math.floor(Math.random() * users.length)],
