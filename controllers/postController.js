@@ -20,7 +20,8 @@ exports.createNewPost = async(req, res) => {
 	const newPost = await Post.create({
 		title: title,
 		author: author,
-		text: text
+		text: text,
+		numLikes: 0,
 	})
 	
 	res.redirect("/posts")
