@@ -21,6 +21,9 @@
 	</form>
 	
 	<p>Likes: <%= post.numLikes %></p>
+	<form action="/posts/<%= post.id %>/likes?_method=PATCH" method="POST">
+		<button type="submit">I like this!</button>
+	</form>
 	
 	<h3>Comments (<%= comments.length %>)</h3>
 	
