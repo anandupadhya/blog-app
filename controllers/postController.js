@@ -8,13 +8,16 @@ exports.getAllPosts = async (req, res) => {
 }
 
 exports.getNewPostForm = async (req, res) => {
-	const users = await User.find({})
-	res.render("posts/new", { users })
+	if (req.user) {
+		res.render("posts/new")
+	} else {
+		res.redirect("/auth/google")
+	}
 }
 
 exports.createNewPost = async(req, res) => {
 	const title = req.body.title
-	const author = req.body.author
+	const author = req.user.id
 	const text = req.body.text
 	
 	const newPost = await Post.create({
@@ -64,7 +67,7 @@ exports.deleteOnePost = async (req, res) => {
 
 exports.createComment = async(req, res) => {
 	const postId = req.params.postId
-	const author = req.body.author
+	const author = req.user.id
 	const text = req.body.text
 	
 	const newComment = await Comment.create({
