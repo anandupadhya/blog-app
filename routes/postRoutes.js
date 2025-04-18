@@ -21,6 +21,9 @@ router.get("/:postId/edit", postController.getEditPostForm)
 // UPDATE - updates one post
 router.patch("/:postId", postController.updatePost)
 
+// DELETE MANY = delete many post
+router.delete("/deleteMany", postController.deleteManyPosts)
+
 // DELETE = delete one post
 router.delete("/:postId", postController.deleteOnePost)
 

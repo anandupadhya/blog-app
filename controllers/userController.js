@@ -7,7 +7,6 @@ exports.getUserProfile = async (req, res) => {
 	}
 	
 	const userPosts = await Post.find({ author: req.user })
-	console.log(userPosts)
 	res.render("users/profile", { userPosts })
 }
 
