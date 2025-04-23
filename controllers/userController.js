@@ -7,7 +7,9 @@ exports.getUserProfile = async (req, res) => {
 	}
 	
 	const userPosts = await Post.find({ author: req.user })
-	res.render("users/profile", { userPosts })
+	const publishedPosts = await userPosts.filter((p) => { return p.isPublished === true })
+	const draftPosts = await userPosts.filter((p) => { return p.isPublished === false })
+	res.render("users/profile", { userPosts, publishedPosts, draftPosts })
 }
 
 exports.updateUserProfile = async (req, res) => {
