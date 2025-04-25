@@ -98,7 +98,9 @@ exports.managePosts = async (req, res) => {
 	}
 	
 	const action = req.body.action
-	console.log(action, posts)
+	const destination = req.body.destination
+	
+	console.log(action, posts, destination)
 	
 	if (action === "destroy") {
 		await posts.forEach( async (postId) => {
@@ -133,6 +135,11 @@ exports.managePosts = async (req, res) => {
 				{ $set: { isDeleted : true } }
 			)
 		})
+	}
+	
+	if (destination) {
+		res.redirect(destination)
+		return
 	}
 	
 	res.redirect("/users/profile")
