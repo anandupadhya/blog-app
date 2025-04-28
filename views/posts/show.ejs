@@ -35,7 +35,7 @@
 	<% } %>
 	
 	<p>Likes: <%= post.numLikes %></p>
-	<% if (post.isDeleted === false) { %>
+	<% if (post.isPublished === true && (post.isDeleted === false)) { %>
 		<form action="/posts/<%= post.id %>/likes?_method=PATCH" method="POST">
 			<button type="submit">I like this!</button>
 		</form>
@@ -57,7 +57,7 @@
 		<% }) %>
 	<% } %>
 	
-	<% if (post.isDeleted === false) { %>
+	<% if (post.isPublished === true && (post.isDeleted === false)) { %>
 		<% if (user) { %>
 			<form action="/posts/<%= post.id %>/comments" method="POST">
 				<textarea name="text" placeholder="Comment text..."></textarea><br>
