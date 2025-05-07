@@ -38,11 +38,12 @@ const seedDB = async () => {
 	}
 	
 	const user = await User.create({
+		googleId: "114991314493776009508",
 		username: "AnandUpadhya",
 		password: "11111",
 		firstName: "Anand",
 		lastName: "Upadhya",
-		email: "Anand.Upadhya@gmail.com"
+		email: "anand.upadhya@gmail.com"
 	})
 	users.push(user)
 	console.log(user)
@@ -53,7 +54,9 @@ const seedDB = async () => {
 			title: faker.book.title(),
 			author: users[Math.floor(Math.random() * users.length)],
 			text: faker.lorem.paragraphs(),
-			numLikes: Math.floor(Math.random() * 100)
+			numLikes: Math.floor(Math.random() * 100),
+			isPublished: true,
+			isDeleted: false,
 		})
 	
 		for (let i = 0; i < 5; i++) {
