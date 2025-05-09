@@ -3,6 +3,7 @@ require('dotenv').config()
 const express = require("express")
 const methodOverride = require("method-override")
 const connectDB = require('./config/db')
+const path = require('path');
 
 const postRoutes = require('./routes/postRoutes')
 const commentRoutes = require('./routes/commentRoutes')
@@ -20,6 +21,7 @@ app.use(methodOverride('_method'))
 app.use(express.json())
 app.set("view engine", "ejs")
 app.use(express.urlencoded({ extended: true}))
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
   secret: 'your secret',
