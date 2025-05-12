@@ -7,6 +7,19 @@ const Post = require('../models/Post')
 const Comment = require('../models/Comment')
 const User = require('../models/User')
 
+const avatarFiles = [
+  'Multiavatar-1b86d46210a71a58ab.png',
+  'Multiavatar-4a70b89e073219a9bd.png',
+  'Multiavatar-4fbeec69f884112169.png',
+  'Multiavatar-53681aa8c3fdf9571e.png',
+  'Multiavatar-6216ed4c8a37d1d0f1.png',
+  'Multiavatar-77a84f03aed0213921.png',
+  'Multiavatar-b48b7fb012d49dc1dc.png',
+  'Multiavatar-bf5e8b88eefa76f096.png',
+  'Multiavatar-cfe0998f7579ce0855.png',
+  'Multiavatar-f8dd8448e0b399b4d9.png'
+]
+
 const seedDB = async () => {
 	// connect to database
 	const uri = process.env.MONGODB_URI
@@ -31,7 +44,8 @@ const seedDB = async () => {
 			password: "11111",
 			firstName: firstName,
 			lastName: lastName,
-			email: firstName + "." + lastName + "@gmail.com"
+			email: firstName + "." + lastName + "@gmail.com",
+			profilePic: avatarFiles[Math.floor(Math.random() * avatarFiles.length)],
 		})
 		users.push(user)
 		console.log(user)
@@ -43,7 +57,8 @@ const seedDB = async () => {
 		password: "11111",
 		firstName: "Anand",
 		lastName: "Upadhya",
-		email: "anand.upadhya@gmail.com"
+		email: "anand.upadhya@gmail.com",
+		profilePic: "Multiavatar-1b86d46210a71a58ab.png"
 	})
 	users.push(user)
 	console.log(user)
