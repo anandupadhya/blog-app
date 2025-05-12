@@ -1,3 +1,6 @@
+const path = require('path')
+const fs = require('fs').promises
+
 const User = require('../models/User')
 const Post = require('../models/Post')
 const Comment = require('../models/Comment')
@@ -12,9 +15,13 @@ exports.getUserProfile = async (req, res) => {
 	const draftPosts = await userPosts.filter((p) => { return p.isDeleted === false && p.isPublished === false })
 	const deletedPosts = await userPosts.filter((p) => { return p.isDeleted === true })
 	
+	const avatarsPath = path.join(__dirname, '..', 'public', 'avatars');
+	let avatarFiles = await fs.readdir(avatarsPath)
+	console.log(avatarFiles)
+	
 	const userComments = await Comment.find({ author: req.user }).populate("postId", "title")
 	// console.log(userComments)
-	res.render("users/profile", { userPosts, publishedPosts, draftPosts, deletedPosts, userComments })
+	res.render("users/profile", { userPosts, publishedPosts, draftPosts, deletedPosts, userComments, avatarFiles })
 }
 
 exports.updateUserProfile = async (req, res) => {
