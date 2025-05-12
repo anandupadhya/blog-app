@@ -57,6 +57,7 @@
 		<p>No comments yet</p>
 	<% } else { %>
 		<% comments.forEach((c) => { %>
+			<img src="/avatars/<%= c.author.profilePic %>" width=25>
 			<p><%= c.text %> - <%= c.author.firstName + " " + c.author.lastName %></p>
 			<% if (user && c.author.id === user.id) { %>
 				<form action="/comments/<%= c.id %>?_method=DELETE" method="POST">
