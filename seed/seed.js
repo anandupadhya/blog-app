@@ -1,4 +1,6 @@
 require('dotenv').config()
+const path = require('path')
+const fs = require('fs').promises
 
 const { faker } = require("@faker-js/faker")
 const mongoose = require('mongoose');
@@ -7,20 +9,11 @@ const Post = require('../models/Post')
 const Comment = require('../models/Comment')
 const User = require('../models/User')
 
-const avatarFiles = [
-  'Multiavatar-1b86d46210a71a58ab.png',
-  'Multiavatar-4a70b89e073219a9bd.png',
-  'Multiavatar-4fbeec69f884112169.png',
-  'Multiavatar-53681aa8c3fdf9571e.png',
-  'Multiavatar-6216ed4c8a37d1d0f1.png',
-  'Multiavatar-77a84f03aed0213921.png',
-  'Multiavatar-b48b7fb012d49dc1dc.png',
-  'Multiavatar-bf5e8b88eefa76f096.png',
-  'Multiavatar-cfe0998f7579ce0855.png',
-  'Multiavatar-f8dd8448e0b399b4d9.png'
-]
-
 const seedDB = async () => {
+	// load avatar pic file names
+	const avatarsPath = path.join(__dirname, '..', 'public', 'avatars')
+	let avatarFiles = await fs.readdir(avatarsPath)
+	
 	// connect to database
 	const uri = process.env.MONGODB_URI
 	await mongoose.connect(uri, {
