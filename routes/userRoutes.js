@@ -9,4 +9,6 @@ router.patch("/profile", userController.updateUserProfile)
 
 router.patch("/updateProfilePic", userController.updateProfilePic)
 
+router.get("/:userId", userController.getPublicProfile)
+
 module.exports = router
