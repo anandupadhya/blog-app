@@ -57,37 +57,41 @@ const seedDB = async () => {
 	console.log(user)
 	
 	// generate posts, likes, and comments
-	for (let i = 0; i < 10; i++) {
-		// create a new post
-		const post = await Post.create({
-			title: faker.book.title(),
-			author: users[Math.floor(Math.random() * users.length)],
-			text: faker.lorem.paragraphs(),
-			numLikes: 0,
-			isPublished: true,
-			isDeleted: false,
-			likedBy: [],
-		})
-		
-		// create likes by users
-		for (let i = 0; i < 100; i++) {
-			const user = users[Math.floor(Math.random() * users.length)]
-			if (!post.likedBy.includes(user.id)) {
-				post.likedBy.push(user.id)
-				post.numLikes += 1
-				await post.save()
+	users.forEach(async (u) =>  {
+		const numPosts = Math.floor(Math.random() * 6)
+		for (let i = 0; i < numPosts; i++) {
+			// create a new post
+			const post = await Post.create({
+				title: faker.book.title(),
+				author: u,
+				text: faker.lorem.paragraphs(),
+				numLikes: 0,
+				isPublished: true,
+				isDeleted: false,
+				likedBy: [],
+			})
+
+			// create likes by users
+			for (let i = 0; i < 50; i++) {
+				const user = users[Math.floor(Math.random() * users.length)]
+				if (!post.likedBy.includes(user.id)) {
+					post.likedBy.push(user.id)
+					post.numLikes += 1
+					await post.save()
+				}
+			}
+
+			// create comments for post
+			const numComments = Math.floor(Math.random() * 9) + 2
+			for (let i = 0; i < numComments; i++) {
+				await Comment.create({
+					postId: post.id,
+					author: users[Math.floor(Math.random() * users.length)],
+					text: faker.lorem.sentence(),
+				})
 			}
 		}
-	
-		// create comments for post
-		for (let i = 0; i < 5; i++) {
-			await Comment.create({
-				postId: post.id,
-				author: users[Math.floor(Math.random() * users.length)],
-				text: faker.lorem.sentence(),
-			})
-		}
-	}
+	})
 	
 	mongoose.connection.close()
 }
