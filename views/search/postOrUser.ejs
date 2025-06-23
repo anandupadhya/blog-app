@@ -11,8 +11,16 @@
 <body>
 	<%- include('../partials/navbar') %>
 	
-	<p><%= postResults %></p>
-	<p><%= userResults %></p>
+	<h3>Posts</h3>
+	<% for (const p of postResults) { %>
+		<a href="/posts/<%= p.id %>"><%= p.title %></a><br>
+	<% } %>
+	
+	<h3>Users</h3>
+	<!-- Anand Upadhya (anandupadhya)	 -->
+	<% for (const u of userResults) { %>
+		<a href="/users/<%= u.id %>"><%= u.firstName %> <%= u.lastName %> (<%= u.username %>)</a><br>
+	<% } %>
 	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
